@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<!--　引入protobuf相关js文件　-->                                     
+<script src="./Long.min.js"></script>         <!-- https://raw.github.com/dcodeIO/Long.js/master/dist/Long.min.js -->
+<script src="./ByteBufferAB.min.js"></script> <!-- https://raw.github.com/dcodeIO/ByteBuffer.js/master/dist/ByteBufferAB.min.js -->
+<script src="./ProtoBuf.min.js"></script>     <!-- https://raw.github.com/dcodeIO/ProtoBuf.js/master/dist/ProtoBuf.min.js -->
+
+Netty WebSocket 时间服务器
+</head>
+<br>
+<body>
+<br>
+<!-- ProtoBuf处理 messageJs.proto-->
+<script language="javascript" type="text/javascript">
+	
+if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
+    throw(new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions."));
+}
+// 创建ProtoBuf
+var ProtoBuf = dcodeIO.ProtoBuf;
+var Build = ProtoBuf.loadProtoFile("Request.proto");
+var Req = Build.build("com.cn.common.core.model.Req");
+var Head = Build.build("com.cn.common.core.model.Head");
+var Body = Build.build("com.cn.common.core.model.Body");
+var socket;
+if (!window.WebSocket) 
+{
+	window.WebSocket = window.MozWebSocket;
+}
+if (window.WebSocket) {
+	socket = new WebSocket("ws://localhost:8989/websocket");
+	socket.binaryType = "arraybuffer"; // We are talking binary
+	socket.onmessage = function(event) {
+	
+		var bytes = new Uint8Array(event.data);
+		var msgDec = Req.decode(bytes);
+		var headSon = Head.decode(msgDec.getBody().getData());
+		var ta = document.getElementById('responseText');
+		//ta.value="";
+		ta.value += "\n"+msgDec.getHead().getCmd();
+	};
+	socket.onopen = function(event) {
+		var ta = document.getElementById('responseText');
+		ta.value = "打开WebSocket服务正常，浏览器支持WebSocket!";
+	};
+	socket.onclose = function(event) {
+		var ta = document.getElementById('responseText');
+		ta.value = "";
+		ta.value = "WebSocket 关闭!"; 
+	};
+}
+else
+	{
+	alert("抱歉，您的浏览器不支持WebSocket协议!");
+	}
+
+function send(message) {
+	if (!window.WebSocket) { return; }
+	if (socket.readyState == WebSocket.OPEN) {
+		//socket.send(message);
+		
+		var head = new Head({
+		"module":1,
+		"cmd":1
+		});
+		var head2 = new Head({
+		"module":2,
+		"cmd":2
+		});
+		var body = new Body({
+		"data":head2.toArrayBuffer()
+		});
+		var request = new Req({
+		"head":head,
+		"body":body
+		});
+		socket.send(request.toArrayBuffer());
+	}
+	else
+		{
+		  alert("WebSocket连接没有建立成功!");
+		}
+}
+</script>
+<form onsubmit="return false;">
+<input type="text" name="message" value="Netty最佳实践"/>
+<br><br>
+<input type="button" value="发送WebSocket请求消息" onclick="send(this.form.message.value)"/>
+<hr color="blue"/>
+<h3>服务端返回的应答消息</h3>
+<textarea id="responseText" style="width:500px;height:300px;"></textarea>
+</form>
+</body>
+</html>
