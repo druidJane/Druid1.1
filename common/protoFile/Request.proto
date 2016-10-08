@@ -1,0 +1,33 @@
+package com.cn.common.core.model;
+option java_package="com.cn.common.core.model.proto";
+option java_outer_classname = "RequestProto" ;
+
+
+
+//数据
+message Body{
+	required bytes data = 1 ;
+}
+
+//模块类型
+enum ModuleType{
+	PLAYER = 1;
+	CHAT = 2 ;
+}
+//命令类型
+enum CmdType{
+	PUBLIC_CHAT = 1;
+	PRIVATE_CHAT = 2 ;
+	PUSHCHAT = 101;
+}
+
+//包头
+message Head{
+	optional int32 HEADER_FLAG = 1 [default = 21415431];
+	required ModuleType module = 2 [default = PLAYER];
+	required CmdType cmd = 3 [default = PUBLIC_CHAT];
+}
+message Req{
+	required Head head = 1;
+	required Body body = 2;
+}

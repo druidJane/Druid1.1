@@ -1,0 +1,7 @@
+package com.cn.common.core.model;
+option java_package="com.cn.common.core.model";
+option java_outer_classname="MessageJs";
+
+message UserMessage{
+	required string msg=1;
+}
