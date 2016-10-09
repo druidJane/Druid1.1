@@ -1,0 +1,46 @@
+package com.cn.common.core.model;
+option java_package="com.cn.common.core.model.proto";
+option java_outer_classname = "RequestProto" ;
+
+
+
+//模块类型
+enum ModuleType{
+	PLAYER = 1;
+	CHAT = 2 ;
+}
+//命令类型
+enum CmdType{
+	PUBLIC_CHAT = 11;
+	PRIVATE_CHAT = 12 ;
+	REGISTER_AND_LOGIN = 21;
+	LOGIN = 22;
+	PUSHCHAT = 101;
+}
+
+
+message Req{
+	optional int32 HEADER_FLAG = 1 [default = 21415431];
+	required ModuleType module = 2;
+	required CmdType cmd = 3;
+	required bytes data = 4;
+}
+
+//登录
+message Login{
+	required string username = 1;
+	required string password = 2;
+}
+//注册
+message Register{
+	required string username = 1;
+	required string password = 2;
+}
+//发送消息
+message Message{
+	required string username = 1;
+	required string msg = 2;
+	required string token = 3;
+	optional string toUser = 4;
+	optional string group = 5;
+}

@@ -1,0 +1,39 @@
+package com.cn.common.core.model;
+option java_package="com.cn.common.core.model.proto";
+option java_outer_classname = "ResponseProto" ;
+
+
+//模块类型
+enum ModuleType{
+	PLAYER = 1;
+	CHAT = 2 ;
+}
+//命令类型
+enum CmdType{
+	PUBLIC_CHAT = 11;
+	PRIVATE_CHAT = 12 ;
+	REGISTER_AND_LOGIN = 21;
+	LOGIN = 22;
+	PUSHCHAT = 101;
+}
+message Rsp{
+	optional int32 HEADER_FLAG = 1 [default = 21415431];
+	optional ModuleType module = 2;
+	optional CmdType cmd = 3;
+	optional bytes data = 4 ;
+	required int32 resultCode = 5;
+}
+//登录
+message Login{
+	optional string token = 2;
+}
+//注册
+message Register{
+	optional string token = 2;
+}
+//发送消息
+message Message{
+	required string msg = 1;
+	optional string fromUser = 2;
+	optional string group = 3;
+}
