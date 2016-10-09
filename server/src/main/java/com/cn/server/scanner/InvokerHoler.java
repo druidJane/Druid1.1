@@ -10,18 +10,19 @@ public class InvokerHoler {
     /**
      * 命令调用器
      */
-    private static Map<Short, Map<Short, Invoker>> invokers = new HashMap<>();
+    private static Map<Integer, Map<Integer, Invoker>> invokers = new HashMap<>();
 
-    public static void addInvoker(Short module, Short cmd, Invoker invoker) {
-        Map<Short, Invoker> map = invokers.get(module);
+    public static void addInvoker(Integer module, Integer cmd, Invoker invoker) {
+        Map<Integer, Invoker> map = invokers.get(module);
         if (null == map) {
-            map = new HashMap<Short, Invoker>();
+            map = new HashMap<Integer, Invoker>();
+            invokers.put(module,map);
         }
         map.put(cmd, invoker);
     }
 
-    public static Invoker getInvoker(Short module, Short cmd) {
-        Map<Short, Invoker> map = invokers.get(module);
+    public static Invoker getInvoker(Integer module, Integer cmd) {
+        Map<Integer, Invoker> map = invokers.get(module);
         if (map != null) {
             return map.get(cmd);
         }

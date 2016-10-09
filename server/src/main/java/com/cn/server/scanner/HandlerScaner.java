@@ -22,6 +22,7 @@ public class HandlerScaner implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class<? extends Object> clazz = bean.getClass();
+        System.out.println(clazz.getName());
         Class<?>[] interfaces = clazz.getInterfaces();
         for (Class<?> interFace : interfaces) {
             SocketModule socketModule = interFace.getAnnotation(SocketModule.class);
@@ -35,10 +36,10 @@ public class HandlerScaner implements BeanPostProcessor {
                     if (socketCommand == null) {
                         continue;
                     }
-                    final short cmd = socketCommand.cmd();
-                    final short module = socketModule.module();
+                    final int cmd = socketCommand.cmd();
+                    final int module = socketModule.module();
                     if (InvokerHoler.getInvoker(module, cmd) == null) {
-                        InvokerHoler.addInvoker(module, cmd, Invoker.valueOf(method, cmd));
+                        InvokerHoler.addInvoker(module, cmd, Invoker.valueOf(method, bean));
                     } else {
                         System.out.println("重复定义模块：" + module + ",命令：" + cmd);
                     }

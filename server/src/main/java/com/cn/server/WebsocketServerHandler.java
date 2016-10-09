@@ -1,6 +1,14 @@
 package com.cn.server;
 
+import com.cn.common.core.coder.Constant;
+import com.cn.common.core.model.Result;
+import com.cn.common.core.model.ResultCode;
 import com.cn.common.core.model.proto.RequestProto;
+import com.cn.common.core.model.proto.ResponseProto;
+import com.cn.common.core.session.SessionImpl;
+import com.cn.server.scanner.Invoker;
+import com.cn.server.scanner.InvokerHoler;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -25,7 +33,6 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * Created by 1115 on 2016/9/23.
  */
 public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> {
-    private static final Logger logger = Logger.getLogger(WebsocketServerHandler.class.getName());
     private WebSocketServerHandshaker handshaker;
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -68,48 +75,47 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
             ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
         }
         if(frame instanceof BinaryWebSocketFrame){
-            byte[] bytes = new byte[frame.content().readableBytes()];
-            RequestProto.Req.Builder req = RequestProto.Req.newBuilder();
-            frame.content().readBytes(bytes);
+            ResponseProto.Rsp.Builder res = ResponseProto.Rsp.newBuilder();
             try {
+                //解析数据
+                byte[] bytes = new byte[frame.content().readableBytes()];
+                RequestProto.Req.Builder req = RequestProto.Req.newBuilder();
+                frame.content().readBytes(bytes);
                 req.mergeFrom(bytes);
-                RequestProto.Head.Builder reqSon = RequestProto.Head.newBuilder();
-                reqSon.mergeFrom(req.getBody().getData());
-                System.out.println(req.getHead().getHEADERFLAG());
-                System.out.println("reqSon="+reqSon.getCmd().getNumber());
+                //数据校验 TODO 检验包头
+                //根据模块，命令获取相关方法
+                Integer cmd = req.getCmd().getNumber();
+                Integer module = req.getModule().getNumber();
+                Invoker invoker = InvokerHoler.getInvoker(module,cmd);
+                if(invoker!=null){
+                    Result<?> result = null;
+                    SessionImpl session = new SessionImpl(ctx.channel());
+                    //执行相关业务逻辑
+                    result = (Result<?>)invoker.invoke(session,req.getData().toByteArray());
+                    //封装响应数据
+                    //构建包头
+                    res.setHEADERFLAG(Constant.HEADER_FLAG);
+                    res.setCmd(ResponseProto.CmdType.valueOf(cmd));
+                    res.setModule(ResponseProto.ModuleType.valueOf(module));
+                    if (ResultCode.SUCCESS==result.getResultCode()) {
+                        //构建包数据
+                        byte[] content = (byte[])result.getContent();
+                        res.setData(ByteString.copyFrom(content));
+                    }
+                    res.setResultCode(result.getResultCode());
+                }else{
+                    res.setResultCode(ResultCode.NO_INVOKER);
+                }
             } catch (InvalidProtocolBufferException e) {
+                res.setResultCode(ResultCode.AGRUMENT_ERROR);
+            } catch (Exception e){
                 e.printStackTrace();
+                res.setResultCode(ResultCode.UNKOWN_EXCEPTION);
+            } finally{
+                //输出数据到客户端
+                ctx.channel().write(new BinaryWebSocketFrame(Unpooled.wrappedBuffer(res.build().toByteArray())));
             }
-            RequestProto.Head.Builder head = RequestProto.Head.newBuilder();
-            head.setCmd(RequestProto.CmdType.PUSHCHAT);
-            head.setModule(RequestProto.ModuleType.PLAYER);
-            RequestProto.Body.Builder body = RequestProto.Body.newBuilder();
-            body.setData(head.build().toByteString());
-            RequestProto.Req.Builder res = RequestProto.Req.newBuilder();
-            head.setHEADERFLAG(555);
-            res.setHead(head.build());
-            res.setBody(body.build());
-            ctx.channel().write(new BinaryWebSocketFrame(Unpooled.wrappedBuffer(res.build().toByteArray())));
         }
-        /*if(frame instanceof BinaryWebSocketFrame){
-            byte[] bytes = new byte[frame.content().readableBytes()];
-            MessageJs.UserMessage.Builder builder = MessageJs.UserMessage.newBuilder();
-            frame.content().readBytes(bytes);
-            MessageJs.UserMessage.Builder msg;
-            try {
-                msg = builder.mergeFrom(bytes);
-                System.out.println(msg.getMsg());
-                msg.setMsg(msg.getMsg()+
-                        ",欢迎使用Netty WebSocket服务，现在时刻："+new Date().toString());
-                MessageJs.UserMessage user = msg.build();
-                ByteBuf response = Unpooled.buffer();
-                response.writeInt(100);
-                response.writeBytes(user.toByteArray());
-                ctx.channel().write(new BinaryWebSocketFrame(response));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
         //本历程仅支持文本消息，不支持二进制消息
         /*if(!(frame instanceof TextWebSocketFrame)){
             throw new UnsupportedOperationException(String.format(
@@ -121,7 +127,7 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
 
     }
-    public static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res){
+    private static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res){
         //返回应答给客户端
         if(res.getStatus().code()!=200){
             ByteBuf buf = Unpooled.copiedBuffer(res.getStatus().toString(), CharsetUtil.UTF_8);

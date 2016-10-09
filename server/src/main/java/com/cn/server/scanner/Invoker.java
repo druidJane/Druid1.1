@@ -25,7 +25,7 @@ public class Invoker {
 
     public Object invoke(Object... paramValues){
         try {
-            return method.invoke(paramValues);
+            return method.invoke(target, paramValues);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
