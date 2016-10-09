@@ -1,1 +1,5 @@
+protoc.exe --java_out=..\src\main\java\com\cn\common\core\model\proto\ .\..\..\web\src\main\webapp\WEB-INF\Request.proto
+
 protoc.exe --java_out=.\ .\Request.proto
+
+protoc.exe --java_out=..\src\main\java\com\cn\common\core\model\proto\ .\Request.proto

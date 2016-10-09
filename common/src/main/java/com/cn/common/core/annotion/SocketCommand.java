@@ -8,12 +8,12 @@ import java.lang.annotation.Target;
 /**请求命令
  * Created by 1115 on 2016/9/22.
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SocketCommand {
     /**
      * 请求的命令号
      * @return
      */
-    short cmd();
+    int cmd();
 }

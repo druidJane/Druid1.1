@@ -15,5 +15,5 @@ public @interface SocketModule {
      * 请求的模块号
      * @return
      */
-    short module();
+    int module();
 }

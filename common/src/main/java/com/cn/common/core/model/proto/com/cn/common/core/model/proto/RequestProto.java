@@ -155,356 +155,7 @@ public final class RequestProto {
     // @@protoc_insertion_point(enum_scope:com.cn.common.core.model.CmdType)
   }
   
-  public interface BodyOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // required bytes data = 1;
-    boolean hasData();
-    com.google.protobuf.ByteString getData();
-  }
-  public static final class Body extends
-      com.google.protobuf.GeneratedMessage
-      implements BodyOrBuilder {
-    // Use Body.newBuilder() to construct.
-    private Body(Builder builder) {
-      super(builder);
-    }
-    private Body(boolean noInit) {}
-    
-    private static final Body defaultInstance;
-    public static Body getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public Body getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Body_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Body_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // required bytes data = 1;
-    public static final int DATA_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString data_;
-    public boolean hasData() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public com.google.protobuf.ByteString getData() {
-      return data_;
-    }
-    
-    private void initFields() {
-      data_ = com.google.protobuf.ByteString.EMPTY;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      if (!hasData()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, data_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, data_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Body parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.cn.common.core.model.proto.RequestProto.Body prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.cn.common.core.model.proto.RequestProto.BodyOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Body_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Body_fieldAccessorTable;
-      }
-      
-      // Construct using com.cn.common.core.model.proto.RequestProto.Body.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        data_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.cn.common.core.model.proto.RequestProto.Body.getDescriptor();
-      }
-      
-      public com.cn.common.core.model.proto.RequestProto.Body getDefaultInstanceForType() {
-        return com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance();
-      }
-      
-      public com.cn.common.core.model.proto.RequestProto.Body build() {
-        com.cn.common.core.model.proto.RequestProto.Body result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.cn.common.core.model.proto.RequestProto.Body buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.cn.common.core.model.proto.RequestProto.Body result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.cn.common.core.model.proto.RequestProto.Body buildPartial() {
-        com.cn.common.core.model.proto.RequestProto.Body result = new com.cn.common.core.model.proto.RequestProto.Body(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.data_ = data_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.cn.common.core.model.proto.RequestProto.Body) {
-          return mergeFrom((com.cn.common.core.model.proto.RequestProto.Body)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.cn.common.core.model.proto.RequestProto.Body other) {
-        if (other == com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance()) return this;
-        if (other.hasData()) {
-          setData(other.getData());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        if (!hasData()) {
-          
-          return false;
-        }
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              data_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // required bytes data = 1;
-      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
-      public boolean hasData() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public com.google.protobuf.ByteString getData() {
-        return data_;
-      }
-      public Builder setData(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        data_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        data_ = getDefaultInstance().getData();
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.cn.common.core.model.Body)
-    }
-    
-    static {
-      defaultInstance = new Body(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.cn.common.core.model.Body)
-  }
-  
-  public interface HeadOrBuilder
+  public interface ReqOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 HEADER_FLAG = 1 [default = 21415431];
@@ -518,33 +169,37 @@ public final class RequestProto {
     // required .com.cn.common.core.model.CmdType cmd = 3;
     boolean hasCmd();
     com.cn.common.core.model.proto.RequestProto.CmdType getCmd();
+    
+    // required bytes data = 4;
+    boolean hasData();
+    com.google.protobuf.ByteString getData();
   }
-  public static final class Head extends
+  public static final class Req extends
       com.google.protobuf.GeneratedMessage
-      implements HeadOrBuilder {
-    // Use Head.newBuilder() to construct.
-    private Head(Builder builder) {
+      implements ReqOrBuilder {
+    // Use Req.newBuilder() to construct.
+    private Req(Builder builder) {
       super(builder);
     }
-    private Head(boolean noInit) {}
+    private Req(boolean noInit) {}
     
-    private static final Head defaultInstance;
-    public static Head getDefaultInstance() {
+    private static final Req defaultInstance;
+    public static Req getDefaultInstance() {
       return defaultInstance;
     }
     
-    public Head getDefaultInstanceForType() {
+    public Req getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Head_descriptor;
+      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Req_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Head_fieldAccessorTable;
+      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Req_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -578,10 +233,21 @@ public final class RequestProto {
       return cmd_;
     }
     
+    // required bytes data = 4;
+    public static final int DATA_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString data_;
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public com.google.protobuf.ByteString getData() {
+      return data_;
+    }
+    
     private void initFields() {
       hEADERFLAG_ = 21415431;
       module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
       cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
+      data_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -593,6 +259,10 @@ public final class RequestProto {
         return false;
       }
       if (!hasCmd()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasData()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -611,6 +281,9 @@ public final class RequestProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, cmd_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, data_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -633,485 +306,9 @@ public final class RequestProto {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, cmd_.getNumber());
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.cn.common.core.model.proto.RequestProto.Head parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.cn.common.core.model.proto.RequestProto.Head prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.cn.common.core.model.proto.RequestProto.HeadOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Head_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Head_fieldAccessorTable;
-      }
-      
-      // Construct using com.cn.common.core.model.proto.RequestProto.Head.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        hEADERFLAG_ = 21415431;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.cn.common.core.model.proto.RequestProto.Head.getDescriptor();
-      }
-      
-      public com.cn.common.core.model.proto.RequestProto.Head getDefaultInstanceForType() {
-        return com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance();
-      }
-      
-      public com.cn.common.core.model.proto.RequestProto.Head build() {
-        com.cn.common.core.model.proto.RequestProto.Head result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.cn.common.core.model.proto.RequestProto.Head buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.cn.common.core.model.proto.RequestProto.Head result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.cn.common.core.model.proto.RequestProto.Head buildPartial() {
-        com.cn.common.core.model.proto.RequestProto.Head result = new com.cn.common.core.model.proto.RequestProto.Head(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.hEADERFLAG_ = hEADERFLAG_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.module_ = module_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.cmd_ = cmd_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.cn.common.core.model.proto.RequestProto.Head) {
-          return mergeFrom((com.cn.common.core.model.proto.RequestProto.Head)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.cn.common.core.model.proto.RequestProto.Head other) {
-        if (other == com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance()) return this;
-        if (other.hasHEADERFLAG()) {
-          setHEADERFLAG(other.getHEADERFLAG());
-        }
-        if (other.hasModule()) {
-          setModule(other.getModule());
-        }
-        if (other.hasCmd()) {
-          setCmd(other.getCmd());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        if (!hasModule()) {
-          
-          return false;
-        }
-        if (!hasCmd()) {
-          
-          return false;
-        }
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              hEADERFLAG_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.cn.common.core.model.proto.RequestProto.ModuleType value = com.cn.common.core.model.proto.RequestProto.ModuleType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                module_ = value;
-              }
-              break;
-            }
-            case 24: {
-              int rawValue = input.readEnum();
-              com.cn.common.core.model.proto.RequestProto.CmdType value = com.cn.common.core.model.proto.RequestProto.CmdType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                cmd_ = value;
-              }
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // optional int32 HEADER_FLAG = 1 [default = 21415431];
-      private int hEADERFLAG_ = 21415431;
-      public boolean hasHEADERFLAG() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public int getHEADERFLAG() {
-        return hEADERFLAG_;
-      }
-      public Builder setHEADERFLAG(int value) {
-        bitField0_ |= 0x00000001;
-        hEADERFLAG_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearHEADERFLAG() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        hEADERFLAG_ = 21415431;
-        onChanged();
-        return this;
-      }
-      
-      // required .com.cn.common.core.model.ModuleType module = 2;
-      private com.cn.common.core.model.proto.RequestProto.ModuleType module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
-      public boolean hasModule() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public com.cn.common.core.model.proto.RequestProto.ModuleType getModule() {
-        return module_;
-      }
-      public Builder setModule(com.cn.common.core.model.proto.RequestProto.ModuleType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        module_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearModule() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
-        onChanged();
-        return this;
-      }
-      
-      // required .com.cn.common.core.model.CmdType cmd = 3;
-      private com.cn.common.core.model.proto.RequestProto.CmdType cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
-      public boolean hasCmd() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public com.cn.common.core.model.proto.RequestProto.CmdType getCmd() {
-        return cmd_;
-      }
-      public Builder setCmd(com.cn.common.core.model.proto.RequestProto.CmdType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000004;
-        cmd_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCmd() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.cn.common.core.model.Head)
-    }
-    
-    static {
-      defaultInstance = new Head(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.cn.common.core.model.Head)
-  }
-  
-  public interface ReqOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // required .com.cn.common.core.model.Head head = 1;
-    boolean hasHead();
-    com.cn.common.core.model.proto.RequestProto.Head getHead();
-    com.cn.common.core.model.proto.RequestProto.HeadOrBuilder getHeadOrBuilder();
-    
-    // required .com.cn.common.core.model.Body body = 2;
-    boolean hasBody();
-    com.cn.common.core.model.proto.RequestProto.Body getBody();
-    com.cn.common.core.model.proto.RequestProto.BodyOrBuilder getBodyOrBuilder();
-  }
-  public static final class Req extends
-      com.google.protobuf.GeneratedMessage
-      implements ReqOrBuilder {
-    // Use Req.newBuilder() to construct.
-    private Req(Builder builder) {
-      super(builder);
-    }
-    private Req(boolean noInit) {}
-    
-    private static final Req defaultInstance;
-    public static Req getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public Req getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Req_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.cn.common.core.model.proto.RequestProto.internal_static_com_cn_common_core_model_Req_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // required .com.cn.common.core.model.Head head = 1;
-    public static final int HEAD_FIELD_NUMBER = 1;
-    private com.cn.common.core.model.proto.RequestProto.Head head_;
-    public boolean hasHead() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public com.cn.common.core.model.proto.RequestProto.Head getHead() {
-      return head_;
-    }
-    public com.cn.common.core.model.proto.RequestProto.HeadOrBuilder getHeadOrBuilder() {
-      return head_;
-    }
-    
-    // required .com.cn.common.core.model.Body body = 2;
-    public static final int BODY_FIELD_NUMBER = 2;
-    private com.cn.common.core.model.proto.RequestProto.Body body_;
-    public boolean hasBody() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public com.cn.common.core.model.proto.RequestProto.Body getBody() {
-      return body_;
-    }
-    public com.cn.common.core.model.proto.RequestProto.BodyOrBuilder getBodyOrBuilder() {
-      return body_;
-    }
-    
-    private void initFields() {
-      head_ = com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance();
-      body_ = com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      if (!hasHead()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasBody()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getHead().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getBody().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, head_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, body_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, head_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, body_);
+          .computeBytesSize(4, data_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1229,8 +426,6 @@ public final class RequestProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getHeadFieldBuilder();
-          getBodyFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1239,18 +434,14 @@ public final class RequestProto {
       
       public Builder clear() {
         super.clear();
-        if (headBuilder_ == null) {
-          head_ = com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance();
-        } else {
-          headBuilder_.clear();
-        }
+        hEADERFLAG_ = 21415431;
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (bodyBuilder_ == null) {
-          body_ = com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance();
-        } else {
-          bodyBuilder_.clear();
-        }
+        module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
         bitField0_ = (bitField0_ & ~0x00000002);
+        cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -1292,19 +483,19 @@ public final class RequestProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (headBuilder_ == null) {
-          result.head_ = head_;
-        } else {
-          result.head_ = headBuilder_.build();
-        }
+        result.hEADERFLAG_ = hEADERFLAG_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        if (bodyBuilder_ == null) {
-          result.body_ = body_;
-        } else {
-          result.body_ = bodyBuilder_.build();
+        result.module_ = module_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
+        result.cmd_ = cmd_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.data_ = data_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1321,30 +512,32 @@ public final class RequestProto {
       
       public Builder mergeFrom(com.cn.common.core.model.proto.RequestProto.Req other) {
         if (other == com.cn.common.core.model.proto.RequestProto.Req.getDefaultInstance()) return this;
-        if (other.hasHead()) {
-          mergeHead(other.getHead());
+        if (other.hasHEADERFLAG()) {
+          setHEADERFLAG(other.getHEADERFLAG());
         }
-        if (other.hasBody()) {
-          mergeBody(other.getBody());
+        if (other.hasModule()) {
+          setModule(other.getModule());
+        }
+        if (other.hasCmd()) {
+          setCmd(other.getCmd());
+        }
+        if (other.hasData()) {
+          setData(other.getData());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
       public final boolean isInitialized() {
-        if (!hasHead()) {
+        if (!hasModule()) {
           
           return false;
         }
-        if (!hasBody()) {
+        if (!hasCmd()) {
           
           return false;
         }
-        if (!getHead().isInitialized()) {
-          
-          return false;
-        }
-        if (!getBody().isInitialized()) {
+        if (!hasData()) {
           
           return false;
         }
@@ -1374,22 +567,36 @@ public final class RequestProto {
               }
               break;
             }
-            case 10: {
-              com.cn.common.core.model.proto.RequestProto.Head.Builder subBuilder = com.cn.common.core.model.proto.RequestProto.Head.newBuilder();
-              if (hasHead()) {
-                subBuilder.mergeFrom(getHead());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setHead(subBuilder.buildPartial());
+            case 8: {
+              bitField0_ |= 0x00000001;
+              hEADERFLAG_ = input.readInt32();
               break;
             }
-            case 18: {
-              com.cn.common.core.model.proto.RequestProto.Body.Builder subBuilder = com.cn.common.core.model.proto.RequestProto.Body.newBuilder();
-              if (hasBody()) {
-                subBuilder.mergeFrom(getBody());
+            case 16: {
+              int rawValue = input.readEnum();
+              com.cn.common.core.model.proto.RequestProto.ModuleType value = com.cn.common.core.model.proto.RequestProto.ModuleType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                module_ = value;
               }
-              input.readMessage(subBuilder, extensionRegistry);
-              setBody(subBuilder.buildPartial());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.cn.common.core.model.proto.RequestProto.CmdType value = com.cn.common.core.model.proto.RequestProto.CmdType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                cmd_ = value;
+              }
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              data_ = input.readBytes();
               break;
             }
           }
@@ -1398,184 +605,97 @@ public final class RequestProto {
       
       private int bitField0_;
       
-      // required .com.cn.common.core.model.Head head = 1;
-      private com.cn.common.core.model.proto.RequestProto.Head head_ = com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.cn.common.core.model.proto.RequestProto.Head, com.cn.common.core.model.proto.RequestProto.Head.Builder, com.cn.common.core.model.proto.RequestProto.HeadOrBuilder> headBuilder_;
-      public boolean hasHead() {
+      // optional int32 HEADER_FLAG = 1 [default = 21415431];
+      private int hEADERFLAG_ = 21415431;
+      public boolean hasHEADERFLAG() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.cn.common.core.model.proto.RequestProto.Head getHead() {
-        if (headBuilder_ == null) {
-          return head_;
-        } else {
-          return headBuilder_.getMessage();
-        }
+      public int getHEADERFLAG() {
+        return hEADERFLAG_;
       }
-      public Builder setHead(com.cn.common.core.model.proto.RequestProto.Head value) {
-        if (headBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          head_ = value;
-          onChanged();
-        } else {
-          headBuilder_.setMessage(value);
-        }
+      public Builder setHEADERFLAG(int value) {
         bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder setHead(
-          com.cn.common.core.model.proto.RequestProto.Head.Builder builderForValue) {
-        if (headBuilder_ == null) {
-          head_ = builderForValue.build();
-          onChanged();
-        } else {
-          headBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder mergeHead(com.cn.common.core.model.proto.RequestProto.Head value) {
-        if (headBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              head_ != com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance()) {
-            head_ =
-              com.cn.common.core.model.proto.RequestProto.Head.newBuilder(head_).mergeFrom(value).buildPartial();
-          } else {
-            head_ = value;
-          }
-          onChanged();
-        } else {
-          headBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder clearHead() {
-        if (headBuilder_ == null) {
-          head_ = com.cn.common.core.model.proto.RequestProto.Head.getDefaultInstance();
-          onChanged();
-        } else {
-          headBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      public com.cn.common.core.model.proto.RequestProto.Head.Builder getHeadBuilder() {
-        bitField0_ |= 0x00000001;
+        hEADERFLAG_ = value;
         onChanged();
-        return getHeadFieldBuilder().getBuilder();
+        return this;
       }
-      public com.cn.common.core.model.proto.RequestProto.HeadOrBuilder getHeadOrBuilder() {
-        if (headBuilder_ != null) {
-          return headBuilder_.getMessageOrBuilder();
-        } else {
-          return head_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          com.cn.common.core.model.proto.RequestProto.Head, com.cn.common.core.model.proto.RequestProto.Head.Builder, com.cn.common.core.model.proto.RequestProto.HeadOrBuilder> 
-          getHeadFieldBuilder() {
-        if (headBuilder_ == null) {
-          headBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.cn.common.core.model.proto.RequestProto.Head, com.cn.common.core.model.proto.RequestProto.Head.Builder, com.cn.common.core.model.proto.RequestProto.HeadOrBuilder>(
-                  head_,
-                  getParentForChildren(),
-                  isClean());
-          head_ = null;
-        }
-        return headBuilder_;
+      public Builder clearHEADERFLAG() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        hEADERFLAG_ = 21415431;
+        onChanged();
+        return this;
       }
       
-      // required .com.cn.common.core.model.Body body = 2;
-      private com.cn.common.core.model.proto.RequestProto.Body body_ = com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.cn.common.core.model.proto.RequestProto.Body, com.cn.common.core.model.proto.RequestProto.Body.Builder, com.cn.common.core.model.proto.RequestProto.BodyOrBuilder> bodyBuilder_;
-      public boolean hasBody() {
+      // required .com.cn.common.core.model.ModuleType module = 2;
+      private com.cn.common.core.model.proto.RequestProto.ModuleType module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
+      public boolean hasModule() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.cn.common.core.model.proto.RequestProto.Body getBody() {
-        if (bodyBuilder_ == null) {
-          return body_;
-        } else {
-          return bodyBuilder_.getMessage();
-        }
+      public com.cn.common.core.model.proto.RequestProto.ModuleType getModule() {
+        return module_;
       }
-      public Builder setBody(com.cn.common.core.model.proto.RequestProto.Body value) {
-        if (bodyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          body_ = value;
-          onChanged();
-        } else {
-          bodyBuilder_.setMessage(value);
+      public Builder setModule(com.cn.common.core.model.proto.RequestProto.ModuleType value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
         bitField0_ |= 0x00000002;
-        return this;
-      }
-      public Builder setBody(
-          com.cn.common.core.model.proto.RequestProto.Body.Builder builderForValue) {
-        if (bodyBuilder_ == null) {
-          body_ = builderForValue.build();
-          onChanged();
-        } else {
-          bodyBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      public Builder mergeBody(com.cn.common.core.model.proto.RequestProto.Body value) {
-        if (bodyBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              body_ != com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance()) {
-            body_ =
-              com.cn.common.core.model.proto.RequestProto.Body.newBuilder(body_).mergeFrom(value).buildPartial();
-          } else {
-            body_ = value;
-          }
-          onChanged();
-        } else {
-          bodyBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      public Builder clearBody() {
-        if (bodyBuilder_ == null) {
-          body_ = com.cn.common.core.model.proto.RequestProto.Body.getDefaultInstance();
-          onChanged();
-        } else {
-          bodyBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      public com.cn.common.core.model.proto.RequestProto.Body.Builder getBodyBuilder() {
-        bitField0_ |= 0x00000002;
+        module_ = value;
         onChanged();
-        return getBodyFieldBuilder().getBuilder();
+        return this;
       }
-      public com.cn.common.core.model.proto.RequestProto.BodyOrBuilder getBodyOrBuilder() {
-        if (bodyBuilder_ != null) {
-          return bodyBuilder_.getMessageOrBuilder();
-        } else {
-          return body_;
-        }
+      public Builder clearModule() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        module_ = com.cn.common.core.model.proto.RequestProto.ModuleType.PLAYER;
+        onChanged();
+        return this;
       }
-      private com.google.protobuf.SingleFieldBuilder<
-          com.cn.common.core.model.proto.RequestProto.Body, com.cn.common.core.model.proto.RequestProto.Body.Builder, com.cn.common.core.model.proto.RequestProto.BodyOrBuilder> 
-          getBodyFieldBuilder() {
-        if (bodyBuilder_ == null) {
-          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.cn.common.core.model.proto.RequestProto.Body, com.cn.common.core.model.proto.RequestProto.Body.Builder, com.cn.common.core.model.proto.RequestProto.BodyOrBuilder>(
-                  body_,
-                  getParentForChildren(),
-                  isClean());
-          body_ = null;
+      
+      // required .com.cn.common.core.model.CmdType cmd = 3;
+      private com.cn.common.core.model.proto.RequestProto.CmdType cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
+      public boolean hasCmd() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.cn.common.core.model.proto.RequestProto.CmdType getCmd() {
+        return cmd_;
+      }
+      public Builder setCmd(com.cn.common.core.model.proto.RequestProto.CmdType value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        return bodyBuilder_;
+        bitField0_ |= 0x00000004;
+        cmd_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCmd() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        cmd_ = com.cn.common.core.model.proto.RequestProto.CmdType.PUBLIC_CHAT;
+        onChanged();
+        return this;
+      }
+      
+      // required bytes data = 4;
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      public boolean hasData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public com.google.protobuf.ByteString getData() {
+        return data_;
+      }
+      public Builder setData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        data_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        data_ = getDefaultInstance().getData();
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.cn.common.core.model.Req)
@@ -3335,16 +2455,6 @@ public final class RequestProto {
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_cn_common_core_model_Body_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_cn_common_core_model_Body_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_cn_common_core_model_Head_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_cn_common_core_model_Head_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_cn_common_core_model_Req_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3374,54 +2484,35 @@ public final class RequestProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\rRequest.proto\022\030com.cn.common.core.mode" +
-      "l\"\024\n\004Body\022\014\n\004data\030\001 \002(\014\"\213\001\n\004Head\022\035\n\013HEAD" +
-      "ER_FLAG\030\001 \001(\005:\01021415431\0224\n\006module\030\002 \002(\0162" +
-      "$.com.cn.common.core.model.ModuleType\022.\n" +
-      "\003cmd\030\003 \002(\0162!.com.cn.common.core.model.Cm" +
-      "dType\"a\n\003Req\022,\n\004head\030\001 \002(\0132\036.com.cn.comm" +
-      "on.core.model.Head\022,\n\004body\030\002 \002(\0132\036.com.c" +
-      "n.common.core.model.Body\"+\n\005Login\022\020\n\010use" +
-      "rname\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\".\n\010Registe" +
-      "r\022\020\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"V\n",
-      "\007Message\022\020\n\010username\030\001 \002(\t\022\013\n\003msg\030\002 \002(\t\022" +
-      "\r\n\005token\030\003 \002(\t\022\016\n\006toUser\030\004 \001(\t\022\r\n\005group\030" +
-      "\005 \001(\t*\"\n\nModuleType\022\n\n\006PLAYER\020\001\022\010\n\004CHAT\020" +
-      "\002*]\n\007CmdType\022\017\n\013PUBLIC_CHAT\020\013\022\020\n\014PRIVATE" +
-      "_CHAT\020\014\022\026\n\022REGISTER_AND_LOGIN\020\025\022\t\n\005LOGIN" +
-      "\020\026\022\014\n\010PUSHCHAT\020eB.\n\036com.cn.common.core.m" +
-      "odel.protoB\014RequestProto"
+      "l\"\230\001\n\003Req\022\035\n\013HEADER_FLAG\030\001 \001(\005:\01021415431" +
+      "\0224\n\006module\030\002 \002(\0162$.com.cn.common.core.mo" +
+      "del.ModuleType\022.\n\003cmd\030\003 \002(\0162!.com.cn.com" +
+      "mon.core.model.CmdType\022\014\n\004data\030\004 \002(\014\"+\n\005" +
+      "Login\022\020\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(" +
+      "\t\".\n\010Register\022\020\n\010username\030\001 \002(\t\022\020\n\010passw" +
+      "ord\030\002 \002(\t\"V\n\007Message\022\020\n\010username\030\001 \002(\t\022\013" +
+      "\n\003msg\030\002 \002(\t\022\r\n\005token\030\003 \002(\t\022\016\n\006toUser\030\004 \001" +
+      "(\t\022\r\n\005group\030\005 \001(\t*\"\n\nModuleType\022\n\n\006PLAYE",
+      "R\020\001\022\010\n\004CHAT\020\002*]\n\007CmdType\022\017\n\013PUBLIC_CHAT\020" +
+      "\013\022\020\n\014PRIVATE_CHAT\020\014\022\026\n\022REGISTER_AND_LOGI" +
+      "N\020\025\022\t\n\005LOGIN\020\026\022\014\n\010PUSHCHAT\020eB.\n\036com.cn.c" +
+      "ommon.core.model.protoB\014RequestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_cn_common_core_model_Body_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_cn_common_core_model_Body_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_cn_common_core_model_Body_descriptor,
-              new java.lang.String[] { "Data", },
-              com.cn.common.core.model.proto.RequestProto.Body.class,
-              com.cn.common.core.model.proto.RequestProto.Body.Builder.class);
-          internal_static_com_cn_common_core_model_Head_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_cn_common_core_model_Head_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_cn_common_core_model_Head_descriptor,
-              new java.lang.String[] { "HEADERFLAG", "Module", "Cmd", },
-              com.cn.common.core.model.proto.RequestProto.Head.class,
-              com.cn.common.core.model.proto.RequestProto.Head.Builder.class);
           internal_static_com_cn_common_core_model_Req_descriptor =
-            getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(0);
           internal_static_com_cn_common_core_model_Req_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_cn_common_core_model_Req_descriptor,
-              new java.lang.String[] { "Head", "Body", },
+              new java.lang.String[] { "HEADERFLAG", "Module", "Cmd", "Data", },
               com.cn.common.core.model.proto.RequestProto.Req.class,
               com.cn.common.core.model.proto.RequestProto.Req.Builder.class);
           internal_static_com_cn_common_core_model_Login_descriptor =
-            getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(1);
           internal_static_com_cn_common_core_model_Login_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_cn_common_core_model_Login_descriptor,
@@ -3429,7 +2520,7 @@ public final class RequestProto {
               com.cn.common.core.model.proto.RequestProto.Login.class,
               com.cn.common.core.model.proto.RequestProto.Login.Builder.class);
           internal_static_com_cn_common_core_model_Register_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(2);
           internal_static_com_cn_common_core_model_Register_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_cn_common_core_model_Register_descriptor,
@@ -3437,7 +2528,7 @@ public final class RequestProto {
               com.cn.common.core.model.proto.RequestProto.Register.class,
               com.cn.common.core.model.proto.RequestProto.Register.Builder.class);
           internal_static_com_cn_common_core_model_Message_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(3);
           internal_static_com_cn_common_core_model_Message_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_cn_common_core_model_Message_descriptor,
