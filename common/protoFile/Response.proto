@@ -1,14 +1,17 @@
 package com.cn.common.core.model;
 option java_package="com.cn.common.core.model.proto";
-option java_outer_classname = "RequestProto" ;
-
-
+option java_outer_classname = "ResponseProto" ;
 
 //数据
 message Body{
 	required bytes data = 1 ;
 }
-
+//包头
+message Head{
+	optional int32 HEADER_FLAG = 1 [default = 21415431];
+	required ModuleType module = 2 [default = CHAT];
+	required CmdType cmd = 3 [default = PUBLIC_CHAT];
+}
 //模块类型
 enum ModuleType{
 	PLAYER = 1;
@@ -22,33 +25,24 @@ enum CmdType{
 	LOGIN = 22;
 	PUSHCHAT = 101;
 }
-
-//包头
-message Head{
-	optional int32 HEADER_FLAG = 1 [default = 21415431];
-	required ModuleType module = 2 [default = CHAT];
-	required CmdType cmd = 3 [default = PUBLIC_CHAT];
-}
 message Req{
 	required Head head = 1;
 	required Body body = 2;
 }
-
 //登录
 message Login{
-	required string username = 1;
-	required string password = 2;
+	required string resultCode = 1;
+	optional string token = 2;
 }
 //注册
 message Register{
-	required string username = 1;
-	required string password = 2;
+	required string resultCode = 1;
+	optional string token = 2;
 }
 //发送消息
 message Message{
-	required string username = 1;
+	required string resultCode = 1;
 	required string msg = 2;
-	required string token = 3;
-	optional string toUser = 4;
-	optional string group = 5;
+	optional string fromUser = 3;
+	optional string group = 4;
 }
