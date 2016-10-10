@@ -23,7 +23,25 @@ public class PlayerHandlerImpl implements PlayerHandler {
         try {
             RequestProto.Login.Builder reqLogin = RequestProto.Login.newBuilder();
             reqLogin.mergeFrom(data);
+            System.out.println("用户名："+reqLogin.getUsername()+",密码："+reqLogin.getPassword());
             result = playerService.login(session, reqLogin.getUsername(), reqLogin.getPassword());
+        } catch (ErrorCodeException e) {
+            return Result.ERROR(e.getErrorCode());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.ERROR(ResultCode.UNKOWN_EXCEPTION);
+        }
+        return Result.SUCCESS(result.toByteArray());
+    }
+
+    @Override
+    public Result<byte[]> register(Session session, byte[] data) {
+        ResponseProto.Register result = null;
+        try {
+            RequestProto.Register.Builder reqRegister = RequestProto.Register.newBuilder();
+            reqRegister.mergeFrom(data);
+            System.out.println("用户名："+reqRegister.getUsername()+",密码："+reqRegister.getPassword());
+            result = playerService.register(session, reqRegister.getUsername(), reqRegister.getPassword());
         } catch (ErrorCodeException e) {
             return Result.ERROR(e.getErrorCode());
         } catch (Exception e) {

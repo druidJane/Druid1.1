@@ -41,8 +41,8 @@ public class Server {
             .childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                   // ch.pipeline().addLast(new RequestDecoder());
-                  //  ch.pipeline().addLast(new ResponseEncoder());
+                    //ch.pipeline().addLast(new RequestDecoder());
+                    //ch.pipeline().addLast(new ResponseEncoder());
                     ch.pipeline().addLast("http-codec",new HttpServerCodec());
                     ch.pipeline().addLast("agreegator",new HttpObjectAggregator(65536));
                     ch.pipeline().addLast("http-chunked",new ChunkedWriteHandler());

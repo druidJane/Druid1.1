@@ -14,4 +14,6 @@ public interface PlayerService{
      * @return
      */
     public ResponseProto.Login login(Session session, String playerName, String passward);
+
+    public ResponseProto.Register register(Session session, String username, String password);
 }

@@ -97,7 +97,7 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
                     res.setHEADERFLAG(Constant.HEADER_FLAG);
                     res.setCmd(ResponseProto.CmdType.valueOf(cmd));
                     res.setModule(ResponseProto.ModuleType.valueOf(module));
-                    if (ResultCode.SUCCESS==result.getResultCode()) {
+                    if (ResultCode.SUCCESS==result.getResultCode()&&result.getContent()!=null) {
                         //构建包数据
                         byte[] content = (byte[])result.getContent();
                         res.setData(ByteString.copyFrom(content));

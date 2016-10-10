@@ -13,4 +13,6 @@ import com.cn.common.core.session.Session;
 public interface PlayerHandler {
     @SocketCommand(cmd = RequestProto.CmdType.LOGIN_VALUE)
     public Result<byte[]> login(Session session, byte[] data);
+    @SocketCommand(cmd = RequestProto.CmdType.REGISTER_AND_LOGIN_VALUE)
+    public Result<byte[]> register(Session session, byte[] data);
 }

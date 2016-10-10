@@ -12,125 +12,311 @@ Netty WebSocket 时间服务器
 <br>
 <body>
 <br>
-<!-- ProtoBuf处理 messageJs.proto-->
-<script language="javascript" type="text/javascript">
-	
-if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
-    throw(new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions."));
-}
-// 创建ProtoBuf
-var ProtoBuf = dcodeIO.ProtoBuf;
-
-var Request = ProtoBuf.loadProtoFile("Request.proto");
-var Response = ProtoBuf.loadProtoFile("Response.proto");
-
-var Message = Request.build("com.cn.common.core.model.Message");
-var Req = Request.build("com.cn.common.core.model.Req");
-var Login = Request.build("com.cn.common.core.model.Login");
-
-var ResLogin = Response.build("com.cn.common.core.model.Login");
-var Rsp = Response.build("com.cn.common.core.model.Rsp");
-
-
-
-var socket;
-if (!window.WebSocket) 
-{
-	window.WebSocket = window.MozWebSocket;
-}
-if (window.WebSocket) {
-	socket = new WebSocket("ws://localhost:8989/websocket");
-	socket.binaryType = "arraybuffer"; // We are talking binary
-	socket.onmessage = function(event) {
-	
-		var bytes = new Uint8Array(event.data);
-		var respone = Rsp.decode(bytes);
-		var cmd = respone.getCmd();
-		console.log(respone.getResultCode());
-		if(respone.getResultCode()==0){
-			if(cmd=="22"){
-				var bodyData = respone.getData();
-				var resLogin = ResLogin.decode(bodyData);
-				alert(resLogin.getToken());
-			}
-		}else{
-			alert(respone.getResultCode());
-		}
-		//var headSon = Head.decode(respone.getBody().getData());
-		//var ta = document.getElementById('responseText');
-		//ta.value="";
-		//ta.value += "\n"+msgDec.getHead().getCmd();
-	};
-	socket.onopen = function(event) {
-		var ta = document.getElementById('responseText');
-		ta.value = "打开WebSocket服务正常，浏览器支持WebSocket!";
-	};
-	socket.onclose = function(event) {
-		var ta = document.getElementById('responseText');
-		ta.value = "";
-		ta.value = "WebSocket 关闭!"; 
-	};
-}
-else
-	{
-	alert("抱歉，您的浏览器不支持WebSocket协议!");
-	}
-function login(){
-	if (!window.WebSocket) { return; }
-	if (socket.readyState == WebSocket.OPEN) {
-		var login = new Login({
-		"username":"first",
-		"password":"123"
-		})
-		var request = new Req({
-		"module":1,
-		"cmd":22,
-		"data":login.toArrayBuffer()
-		});
-		socket.send(request.toArrayBuffer());
-	}
-	else
-		{
-		  alert("WebSocket连接没有建立成功!");
-		}
-}
-function send(message) {
-	if (!window.WebSocket) { return; }
-	if (socket.readyState == WebSocket.OPEN) {
-		//socket.send(message);
-		
-		var head = new Head({
-		"module":1,
-		"cmd":1
-		});
-		var head2 = new Head({
-		"module":2,
-		"cmd":2
-		});
-		var body = new Body({
-		"data":head2.toArrayBuffer()
-		});
-		var request = new Req({
-		"head":head,
-		"body":body
-		});
-		socket.send(request.toArrayBuffer());
-	}
-	else
-		{
-		  alert("WebSocket连接没有建立成功!");
-		}
-}
-
-</script>
 <form onsubmit="return false;">
 <input type="text" name="message" value="Netty最佳实践"/>
 <br><br>
 <input type="button" value="发送WebSocket请求消息" onclick="send(this.form.message.value)"/>
-<input type="button" value="登录" onclick="login()"/>
-<hr color="blue"/>
 <h3>服务端返回的应答消息</h3>
 <textarea id="responseText" style="width:500px;height:300px;"></textarea>
+
+<hr color="blue"/>
+<br>
+<input type="text" value="" placeholder="用户名" id="username"/>
+<input type="text" value="" placeholder="密码" id="password"/>
+<input type="button" value="登录" onclick="login()"/>
+<h3>服务端返回的登录应答消息</h3>
+<textarea id="loginResponse" style="width:500px;height:100px;"></textarea>
+
+<hr color="blue"/>
+<br>
+<input type="text" value="" placeholder="用户名" id="regiserUsername"/>
+<input type="text" value="" placeholder="密码" id="regiserPassword"/>
+<input type="button" value="注册" onclick="register()"/>
+<h3>服务端返回的注册应答消息</h3>
+<textarea id="registerResponse" style="width:500px;height:100px;"></textarea>
+
+<hr color="blue"/>
+<br>
+<input type="text" value="" placeholder="用户名" id="toUser"/>
+<input type="text" value="" placeholder="群" id="toGroup"/>
+
+<input type="button" value="发送" onclick="sendMsg()"/>
+	<br>
+	<textarea style="width:500px;height:100px" id="message"></textarea>
+<h3>服务端返回的聊天应答消息</h3>
+<textarea id="registerResponse" style="width:500px;height:100px;"></textarea>
+	<input type="hidden" id="loginUser"/>
+	<input type="hidden" id="token"/>
 </form>
+<h3>
+	/**
+	* 成功
+	*/
+	int SUCCESS = 0;
+</h3>
+<h3>
+	/**
+	* 找不到命令
+	*/
+	int NO_INVOKER = 1;
+</h3>
+<h3>
+	/**
+	* 参数异常
+	*/
+	int AGRUMENT_ERROR = 2;
+</h3>
+<h3>
+	/**
+	* 未知异常
+	*/
+	int UNKOWN_EXCEPTION = 3;
+</h3>
+<h3>
+	/**
+	* 玩家名或密码不能为空
+	*/
+	int PLAYERNAME_NULL = 4;
+</h3>
+<h3>
+	/**
+	* 玩家名已使用
+	*/
+	int PLAYER_EXIST = 5;
+</h3>
+<h3>
+	/**
+	* 玩家不存在
+	*/
+	int PLAYER_NO_EXIST = 6;
+</h3>
+<h3>
+	/**
+	* 密码错误
+	*/
+	int PASSWARD_ERROR = 7;
+</h3>
+<h3>
+	/**
+	* 您已登录
+	*/
+	int HAS_LOGIN = 8;
+</h3>
+<h3>
+	/**
+	* 登录失败
+	*/
+	int LOGIN_FAIL = 9;
+</h3>
+<h3>
+	/**
+	* 玩家不在线
+	*/
+	int PLAYER_NO_ONLINE = 10;
+</h3>
+<h3>
+	/**
+	* 请先登录
+	*/
+	int LOGIN_PLEASE = 11;
+</h3>
+<h3>
+	/**
+	* 不能私聊自己
+	*/
+	int CAN_CHAT_YOUSELF = 12;
+
+</h3>
+
+<!-- ProtoBuf处理 messageJs.proto-->
+<script language="javascript" type="text/javascript">
+
+	if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
+		throw(new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions."));
+	}
+	// 创建ProtoBuf
+	var ProtoBuf = dcodeIO.ProtoBuf;
+	var Request = ProtoBuf.loadProtoFile("Request.proto");
+	var Response = ProtoBuf.loadProtoFile("Response.proto");
+	var Message = Request.build("com.cn.common.core.model.Message");
+	var Req = Request.build("com.cn.common.core.model.Req");
+	var Login = Request.build("com.cn.common.core.model.Login");
+	var Register = Request.build("com.cn.common.core.model.Register");
+	var ResLogin = Response.build("com.cn.common.core.model.Login");
+	var ResRegister = Response.build("com.cn.common.core.model.Register");
+	var Rsp = Response.build("com.cn.common.core.model.Rsp");
+	var ResMessage = Response.build("com.cn.common.core.model.Message");
+	var socket;
+	if (!window.WebSocket)
+	{
+		window.WebSocket = window.MozWebSocket;
+	}
+	if (window.WebSocket) {
+		socket = new WebSocket("ws://localhost:8989/websocket");
+		socket.binaryType = "arraybuffer"; // We are talking binary
+		socket.onmessage = function(event) {
+
+			var bytes = new Uint8Array(event.data);
+			var respone = Rsp.decode(bytes);
+			doAction(respone);
+			//var headSon = Head.decode(respone.getBody().getData());
+			//var ta = document.getElementById('responseText');
+			//ta.value="";
+			//ta.value += "\n"+msgDec.getHead().getCmd();
+		};
+		socket.onopen = function(event) {
+			var ta = document.getElementById('responseText');
+			ta.value = "打开WebSocket服务正常，浏览器支持WebSocket!";
+		};
+		socket.onclose = function(event) {
+			var ta = document.getElementById('responseText');
+			ta.value = "";
+			ta.value = "WebSocket 关闭!";
+		};
+	}
+	else
+	{
+		alert("抱歉，您的浏览器不支持WebSocket协议!");
+	}
+	function doAction(response){
+		var cmd = response.getCmd();
+
+		//登录处理
+		if(cmd=="22"){
+			var ta = document.getElementById('loginResponse');
+			if(response.getResultCode()==0){
+				var bodyData = response.getData();
+				var resLogin = ResLogin.decode(bodyData);
+				var token = document.getElementById('token');
+				token.value = resLogin.getToken();
+				ta.value = "登录成功，生成Token="+resLogin.getToken();
+			}else{
+				ta.value = "登录失败，错误码="+response.getResultCode();
+			}
+		}else if(cmd=="21"){
+			var ta = document.getElementById('registerResponse');
+			if(response.getResultCode()==0){
+				var bodyData = response.getData();
+				var resRegister = ResRegister.decode(bodyData);
+				ta.value = "注册成功，生成Token="+resRegister.getToken();
+			}else{
+				ta.value = "注册失败，错误码="+response.getResultCode();
+			}
+		}else if(cmd=="11"||cmd=="12"){
+			if(response.getResultCode()==0){
+				var bodyData = response.getData();
+				if(bodyData!=null){
+					var resMessage = ResMessage.decode(bodyData);
+					var ta = document.getElementById('responseText');
+					ta.value += "\n" + resMessage.getFromUser()+" 说："+resMessage.getMsg();
+				}
+            }
+		}
+	}
+	function login(){
+		if (!window.WebSocket) { return; }
+		var name = document.getElementById('username').value;
+		var loginUser = document.getElementById('loginUser');
+		loginUser.value=name;
+		var password = document.getElementById('password').value;
+		if (socket.readyState == WebSocket.OPEN) {
+			var login = new Login({
+				"username":name,
+				"password":password
+			})
+			var request = new Req({
+				"module":1,
+				"cmd":22,
+				"data":login.toArrayBuffer()
+			});
+			socket.send(request.toArrayBuffer());
+		}
+		else
+		{
+			alert("WebSocket连接没有建立成功!");
+		}
+	}
+	function register(){
+		if (!window.WebSocket) { return; }
+		var name = document.getElementById('regiserUsername').value;
+		var loginUser = document.getElementById('loginUser');
+		loginUser.value=name;
+		var password = document.getElementById('regiserPassword').value;
+		if (socket.readyState == WebSocket.OPEN) {
+			var register = new Register({
+				"username":name,
+				"password":password
+			})
+			var request = new Req({
+				"module":1,
+				"cmd":21,
+				"data":register.toArrayBuffer()
+			});
+			socket.send(request.toArrayBuffer());
+		}
+		else
+		{
+			alert("WebSocket连接没有建立成功!");
+		}
+	}
+	function sendMsg() {
+		if (!window.WebSocket) { return; }
+		var toUser = document.getElementById('toUser').value;
+		var toGroup = document.getElementById('toGroup').value;
+		var loginUser = document.getElementById('loginUser').value;
+		var message = document.getElementById('message').value;
+		var token = document.getElementById('token').value;
+
+
+		if (socket.readyState == WebSocket.OPEN) {
+			var msg = new Message({
+				username:loginUser,
+				msg:message,
+				token:token,
+				toUser:toUser,
+				group:toGroup
+			});
+			var cmd=11;
+			if(!toUser==""){
+				cmd = 12;
+			}
+			var request = new Req({
+				"module":2,
+				"cmd":cmd,
+				"data":msg.toArrayBuffer()
+			});
+			socket.send(request.toArrayBuffer());
+		}else{
+			alert("WebSocket连接没有建立成功!");
+		}
+	}
+	function send(message) {
+		if (!window.WebSocket) { return; }
+		if (socket.readyState == WebSocket.OPEN) {
+			//socket.send(message);
+
+			var head = new Head({
+				"module":1,
+				"cmd":1
+			});
+			var head2 = new Head({
+				"module":2,
+				"cmd":2
+			});
+			var body = new Body({
+				"data":head2.toArrayBuffer()
+			});
+			var request = new Req({
+				"head":head,
+				"body":body
+			});
+			socket.send(request.toArrayBuffer());
+		}
+		else
+		{
+			alert("WebSocket连接没有建立成功!");
+		}
+	}
+</script>
 </body>
 </html>
