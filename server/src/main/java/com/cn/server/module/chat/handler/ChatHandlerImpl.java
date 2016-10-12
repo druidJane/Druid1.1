@@ -10,8 +10,6 @@ import com.cn.common.core.session.Session;
 import com.cn.common.core.session.SessionManager;
 import com.cn.server.module.player.dao.PlayerDao;
 import com.google.protobuf.InvalidProtocolBufferException;
-import io.netty.buffer.Unpooled;
-import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

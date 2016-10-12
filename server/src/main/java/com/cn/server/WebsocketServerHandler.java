@@ -12,17 +12,13 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.FullHttpResponse;
-import io.netty.handler.codec.http.HttpHeaders;
+import io.netty.channel.*;
+import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
+import io.netty.handler.codec.sctp.SctpOutboundByteStreamHandler;
 import io.netty.util.CharsetUtil;
 
+import java.net.SocketAddress;
 import java.util.logging.Logger;
 
 import static io.netty.handler.codec.http.HttpHeaders.isKeepAlive;
@@ -36,6 +32,7 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
     private WebSocketServerHandshaker handshaker;
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println(ctx.channel().eventLoop());
         //传统的http接入
         if(msg instanceof FullHttpRequest){
             handleHttpRequest(ctx,(FullHttpRequest)msg);
@@ -50,10 +47,27 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
     }
+
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("handlerAdded");
+        super.handlerAdded(ctx);
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        super.handlerRemoved(ctx);
+        System.out.println("handlerRemoved");
+    }
+
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
+        HttpRequest mReq = (HttpRequest) req;
+        String clientIP = mReq.headers().get("X-Forwarded-For");
+        System.out.println(req.headers().get(""));
         //如果Http解码失败，返回http异常
         if(!req.getDecoderResult().isSuccess()||!"websocket".equals((req.headers().get("Upgrade")))){
             sendHttpResponse(ctx,req,new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
+            System.out.println(req.getUri());
             return;
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
@@ -137,6 +151,7 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
         }
         //如果是非Keep-Alive,关闭连接
         ChannelFuture f = ctx.channel().writeAndFlush(res);
+        //ChannelFuture f = ctx.channel().newSucceededFuture();
         if(!isKeepAlive(req)||res.getStatus().code()!=200){
             f.addListener(ChannelFutureListener.CLOSE);
         }

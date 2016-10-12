@@ -14,6 +14,9 @@ import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,11 +24,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Server {
-
+    @Autowired
+    protected static RedisTemplate<String, String> redisTemplate;
     /**
      * 启动
      */
     public void start() {
+        System.out.println(redisTemplate.boundValueOps("test").get());
         // 服务类
         ServerBootstrap b = new ServerBootstrap();
         // 创建boss和worker
