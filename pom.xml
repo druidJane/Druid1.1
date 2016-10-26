@@ -7,6 +7,43 @@
     <groupId>com.druid</groupId>
     <artifactId>Druid1.0</artifactId>
     <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <package.target>prod</package.target>
+
+        <ctower.framework.version>1.2.23</ctower.framework.version>
+        <ctower.mall.version>2.0.0a</ctower.mall.version>
+        <spring.version>3.2.13.RELEASE</spring.version>
+
+        <nexus.url>http://mall.echoyun.com:6091/nexus/content/groups/public/</nexus.url>
+        <nexus-releases.url>http://mall.echoyun.com:6091/nexus/content/repositories/releases/</nexus-releases.url>
+        <nexus-snapshots.url>http://mall.echoyun.com:6091/nexus/content/repositories/snapshots/</nexus-snapshots.url>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.deploy>deploy</project.deploy>
+    </properties>
+    <!-- == 配置开发/测试/生产环境 == -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <package.target>dev</package.target>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <package.target>test</package.target>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <package.target>prod</package.target>
+            </properties>
+        </profile>
+    </profiles>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>server</module>
@@ -16,11 +53,6 @@
         <module>common</module>
     </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.deploy>deploy</project.deploy>
-    </properties>
 
     <dependencies>
         <dependency>
