@@ -6,6 +6,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -23,7 +25,7 @@ public class ServerMain {
         //System.out.println(bean.boundValueOps("fff").get().getPlayerName());
         Player player = new Player();
         player.setPlayerName("fdffdfdfdf");
-        for (int i=2500;i<3000;i++) {
+        for (int i=0;i<10;i++) {
             player.setPlayerId(i);
             bean.boundValueOps("fff"+i).expire(0, TimeUnit.SECONDS);
             log.info("set i="+i);
@@ -32,6 +34,15 @@ public class ServerMain {
         ConfigInfo cf = (ConfigInfo) applicationContext.getBean("redisConfig");
         log.info(cf.getRedisUrl());
         bean.boundValueOps("fff0").expire(0, TimeUnit.SECONDS);
-        System.out.println(bean.boundValueOps("fff").get().getPlayerName());
+       // System.out.println(bean.boundValueOps("fff").get().getPlayerName());
+        RedisTemplate<String,Set<String>> setBean = applicationContext.getBean(RedisTemplate.class);
+        Set<String> set = new HashSet();
+        for(int i=0;i<300;i++){
+            set.add(i+"ABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
+        }
+        for(int i=0;i<100;i++){
+            setBean.boundSetOps("RFID"+i).add(set);
+        }
+
     }
 }

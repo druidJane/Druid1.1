@@ -12,14 +12,13 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
-import io.netty.handler.codec.sctp.SctpOutboundByteStreamHandler;
 import io.netty.util.CharsetUtil;
-
-import java.net.SocketAddress;
-import java.util.logging.Logger;
 
 import static io.netty.handler.codec.http.HttpHeaders.isKeepAlive;
 import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
@@ -30,6 +29,12 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  */
 public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> {
     private WebSocketServerHandshaker handshaker;
+    /**
+     * dsdsd : dsdsd
+     */
+
+    private String dsdsd;
+
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println(ctx.channel().eventLoop());
@@ -161,5 +166,13 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
         ctx.close();
+    }
+
+    public String getDsdsd() {
+        return dsdsd;
+    }
+
+    public void setDsdsd(String dsdsd) {
+        this.dsdsd = dsdsd;
     }
 }
