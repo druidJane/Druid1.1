@@ -34,6 +34,7 @@ public class ServerMain {
         ConfigInfo cf = (ConfigInfo) applicationContext.getBean("redisConfig");
         log.info(cf.getRedisUrl());
         bean.boundValueOps("fff0").expire(0, TimeUnit.SECONDS);
+
        // System.out.println(bean.boundValueOps("fff").get().getPlayerName());
         RedisTemplate<String,Set<String>> setBean = applicationContext.getBean(RedisTemplate.class);
         Set<String> set = new HashSet();
