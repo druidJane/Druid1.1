@@ -47,7 +47,6 @@ public class TestCondition {
                     conditionC.signalAll();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Timer
                 } finally {
                     lock.unlock();
                 }
