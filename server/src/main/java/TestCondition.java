@@ -1,3 +1,4 @@
+import java.util.Timer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -46,6 +47,7 @@ public class TestCondition {
                     conditionC.signalAll();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    Timer
                 } finally {
                     lock.unlock();
                 }
