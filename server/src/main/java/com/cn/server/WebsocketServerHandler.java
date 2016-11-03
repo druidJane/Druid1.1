@@ -66,9 +66,6 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
     }
 
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
-        HttpRequest mReq = (HttpRequest) req;
-        String clientIP = mReq.headers().get("X-Forwarded-For");
-        System.out.println(req.headers().get(""));
         //如果Http解码失败，返回http异常
         if(!req.getDecoderResult().isSuccess()||!"websocket".equals((req.headers().get("Upgrade")))){
             sendHttpResponse(ctx,req,new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));

@@ -30,9 +30,9 @@ public class TestRedis {
             pool.submit(new TestRedisThread(bean,i+""));
         }*/
         for(int i=0;i<20;i++){
-            Thread thread = new Thread(new TestRedisThread(bean, i + ""));
+            Thread thread = new TestRedisThread(applicationContext,bean, i + "");
             thread.start();
-            thread.join();
+            //thread.join();
         }
         System.out.println(bean.boundValueOps("count").get());
     }
