@@ -9,6 +9,12 @@ public class TestThread {
         MyThread threadA = new MyThread(lock,"A",0);
         MyThread threadB = new MyThread(lock,"B",1);
         MyThread threadC = new MyThread(lock,"C",2);
+        threadC.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+
+            }
+        });
         threadA.start();
         threadB.start();
         threadC.start();

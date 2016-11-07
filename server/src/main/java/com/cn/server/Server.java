@@ -30,7 +30,7 @@ public class Server {
      * 启动
      */
     public void start() {
-        System.out.println(redisTemplate.boundValueOps("test").get());
+//        System.out.println(redisTemplate.boundValueOps("test").get());
         // 服务类
         ServerBootstrap b = new ServerBootstrap();
         // 创建boss和worker
@@ -48,6 +48,7 @@ public class Server {
                 protected void initChannel(SocketChannel ch) throws Exception {
                     //ch.pipeline().addLast(new RequestDecoder());
                     //ch.pipeline().addLast(new ResponseEncoder());
+
                     ch.pipeline().addLast("http-codec",new HttpServerCodec());
                     ch.pipeline().addLast("agreegator",new HttpObjectAggregator(65536));
                     ch.pipeline().addLast("http-chunked",new ChunkedWriteHandler());

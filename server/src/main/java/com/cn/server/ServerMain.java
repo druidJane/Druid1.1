@@ -6,7 +6,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -30,8 +34,8 @@ public class ServerMain {
             bean.boundValueOps("fff"+i).expire(0, TimeUnit.SECONDS);
             log.info("set i="+i);
         }
-        //server.start();
-        ConfigInfo cf = (ConfigInfo) applicationContext.getBean("redisConfig");
+        server.start();
+        /*ConfigInfo cf = (ConfigInfo) applicationContext.getBean("redisConfig");
         log.info(cf.getRedisUrl());
         bean.boundValueOps("fff0").expire(0, TimeUnit.SECONDS);
 
@@ -43,6 +47,16 @@ public class ServerMain {
         }
         for(int i=0;i<100;i++){
             setBean.boundSetOps("RFID"+i).add(set);
+        }*/
+        try {
+            ClassLoader classLoader = Server.class.getClassLoader();
+            File file = new File(classLoader.getResource("redis.properties").getFile());
+            FileInputStream fis = new FileInputStream(file);//属性文件流
+        Properties pro = new Properties();
+            pro.load(fis);
+            System.out.println(pro.get("redis.host"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

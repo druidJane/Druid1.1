@@ -29,11 +29,6 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  */
 public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> {
     private WebSocketServerHandshaker handshaker;
-    /**
-     * dsdsd : dsdsd
-     */
-
-    private String dsdsd;
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -165,11 +160,4 @@ public class WebsocketServerHandler extends SimpleChannelInboundHandler<Object> 
         ctx.close();
     }
 
-    public String getDsdsd() {
-        return dsdsd;
-    }
-
-    public void setDsdsd(String dsdsd) {
-        this.dsdsd = dsdsd;
-    }
 }
