@@ -12,22 +12,15 @@ public class TestThread implements Runnable{
     TestThread(String threadName){
         this.threadName = threadName;
     }
-    RateLimiter rateLimiter ;
+    volatile RateLimiter rateLimiter = RateLimiter.create(5);;
     @Override
     public void run() {
-        rateLimiter = RateLimiter.create(5);
-        //while(true){
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String dateString = formatter.format(System.currentTimeMillis());
             System.out.println("Thread:"+threadName+". start:"+dateString);
-            //rateLimiter.acquire(5);
+            rateLimiter.acquire();
             dateString = formatter.format(System.currentTimeMillis());
             System.out.println("Thread:"+threadName+". end:"+dateString);
-
-           /* rateLimiter.acquire(4);
-        dateString = formatter.format(System.currentTimeMillis());
-        System.out.println("Thread:"+threadName+". acquire 4:"+dateString);*/
         System.out.println();
-        //}
     }
 }
