@@ -1,4 +1,4 @@
-import com.cn.server.TestRedisServiceImpl;
+import com.druid.TestRedisServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 
