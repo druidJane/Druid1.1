@@ -19,8 +19,6 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.google.common.base.Ticker.systemTicker;
-
 /**
  * A rate limiter. Conceptually, a rate limiter distributes permits at a
  * configurable rate. Each {@link #acquire()} blocks if necessary until a permit is
@@ -371,9 +369,12 @@ public abstract class RateLimiter {
     public void acquire(int permits) {
         checkPermits(permits);
         long microsToWait;
+        System.out.println("acquire this.nextFreeTicketMicros="+this.nextFreeTicketMicros);
         synchronized (mutex) {
+            System.out.println("readSafeMicros()="+readSafeMicros());
             microsToWait = reserveNextTicket(permits, readSafeMicros());
         }
+        System.out.println("acquire microsToWait="+microsToWait);
         ticker.sleepMicrosUninterruptibly(microsToWait);
     }
 
@@ -456,7 +457,9 @@ public abstract class RateLimiter {
      * Reserves next ticket and returns the wait time that the caller must wait for.
      */
     private long reserveNextTicket(double requiredPermits, long nowMicros) {
+        System.out.println("before sync nowMicros="+nowMicros);
         resync(nowMicros);
+        System.out.println("nextFreeTicketMicros="+nextFreeTicketMicros+",nowMicros="+nowMicros);
         long microsToNextFreeTicket = nextFreeTicketMicros - nowMicros;
         double storedPermitsToSpend = Math.min(requiredPermits, this.storedPermits);
         double freshPermits = requiredPermits - storedPermitsToSpend;
@@ -466,6 +469,8 @@ public abstract class RateLimiter {
 
         this.nextFreeTicketMicros = nextFreeTicketMicros + waitMicros;
         this.storedPermits -= storedPermitsToSpend;
+        System.out.println("this.storedPermits="+this.storedPermits);
+        System.out.println("microsToNextFreeTicket="+microsToNextFreeTicket);
         return microsToNextFreeTicket;
     }
 
@@ -481,14 +486,17 @@ public abstract class RateLimiter {
 
     private void resync(long nowMicros) {
         // if nextFreeTicket is in the past, resync to now
+        System.out.println("resync nowMicros="+nowMicros+",nextFreeTicketMicros="+nextFreeTicketMicros);
         if (nowMicros > nextFreeTicketMicros) {
             storedPermits = Math.min(maxPermits,
                     storedPermits + (nowMicros - nextFreeTicketMicros) / stableIntervalMicros);
             nextFreeTicketMicros = nowMicros;
+
         }
     }
 
     private long readSafeMicros() {
+        System.out.println("ticker.read()="+ticker.read()+",offsetNanos="+offsetNanos);
         return TimeUnit.NANOSECONDS.toMicros(ticker.read() - offsetNanos);
     }
 
